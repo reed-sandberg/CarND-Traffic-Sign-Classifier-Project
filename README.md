@@ -25,7 +25,7 @@ These photos were divided into three sets intended for training, validation and 
 #### Exploratory visualization
 
 To get an idea of what the training set looks like, it was grouped and sorted by class. For each class,
-10 random samples were [displayed](report.html#data-set-visualization) along with the number of samples represented in that class.
+10 random samples were [displayed](/dataset-exploration/) along with the number of samples represented in that class.
 
 There is notable disparity among the different classes, with some being more represented than others as well as
 obvious differences in average lighting, image quality/clarity, etc. For example, classes 20 and 42 are much less represented than many others,
@@ -122,19 +122,81 @@ I spent most of the time tuning batch size and number of epochs since even sligh
 
 ### External Validation
 
-Since this model showed good results on the training, validation and test sets provided, it was ready to test on external data in the wild. [Five photos](report.html#Load-and-Output-the-Images) of German traffic signs were collected from a Google image search. One of the samples (turn left ahead) looked blurry and was chosen to challenge the strength of the model. The other four photos seemed rather clear with good lighting conditions, and I expected them to be classified correctly.
+Since this model showed good results on the training, validation and test sets provided, it was ready to test on external data in the wild. [Five photos](/untagged/) of German traffic signs were collected from a Google image search. One of the samples (turn left ahead) looked blurry and was chosen to challenge the strength of the model. The other four photos seemed rather clear with good lighting conditions, and I expected them to be classified correctly.
 
 #### Accuracy
 
-The model [correctly classified](report.html#Predict-the-Sign-Type-for-Each-Image) all five images with 100% accuracy.
+The model correctly classified all five images with 100% accuracy.
+
+![11](./classified-samples/class11_sample.jpeg "11")
+![34](./classified-samples/class34_sample.jpeg "34")
+![17](./classified-samples/class17_sample.jpeg "17")
+![14](./classified-samples/class14_sample.jpeg "14")
+![12](./classified-samples/class12_sample.jpeg "12")
 
 #### Certainty and performance analysis
 
 Looking closer at the softmax output reveals high confidence of the model to classify all five samples. The [top five softmax probabilities](report.html#Output-Top-5-Softmax-Probabilities-For-Each-Image-Found-on-the-Web) of each sample predict correctly with 100% probability. Speed limit signs seemed to dominate the top five probabilities in most cases, but with such a high confidence in the leading probability, it's difficult to draw any conclusions about the remaining possibilities since they were all near 0% likelihood.
 
+Softmax results:
+
+```
+Top 5 Softmax for collected sample: Right-of-way at the next intersection
+  Right-of-way at the next intersection (class 11): 1.000
+  Speed limit (20km/h) (class 0): 0.000
+  Speed limit (30km/h) (class 1): 0.000
+  Speed limit (50km/h) (class 2): 0.000
+  Speed limit (60km/h) (class 3): 0.000
+
+Top 5 Softmax for collected sample: Turn left ahead
+  Turn left ahead (class 34): 1.000
+  Keep right (class 38): 0.000
+  Yield (class 13): 0.000
+  Ahead only (class 35): 0.000
+  Traffic signals (class 26): 0.000
+
+Top 5 Softmax for collected sample: No entry
+  No entry (class 17): 1.000
+  Speed limit (20km/h) (class 0): 0.000
+  Speed limit (30km/h) (class 1): 0.000
+  Speed limit (50km/h) (class 2): 0.000
+  Speed limit (60km/h) (class 3): 0.000
+
+Top 5 Softmax for collected sample: Stop
+  Stop (class 14): 1.000
+  Turn left ahead (class 34): 0.000
+  Speed limit (20km/h) (class 0): 0.000
+  Speed limit (30km/h) (class 1): 0.000
+  Speed limit (50km/h) (class 2): 0.000
+
+Top 5 Softmax for collected sample: Priority road
+  Priority road (class 12): 1.000
+  Speed limit (20km/h) (class 0): 0.000
+  Speed limit (30km/h) (class 1): 0.000
+  Speed limit (50km/h) (class 2): 0.000
+  Speed limit (60km/h) (class 3): 0.000
+```
+
+
 ### Visualizing the Neural Network
 
-The first two convolutional layers of the model were brought to life by [plotting them as images](report.html#Step-4-(Optional):-Visualize-the-Neural-Network's-State-with-Test-Images) to gain some deeper insight into the neural network learning ability.
+The first two convolutional layers of the model were brought to life by [plotting them as images](/convolution-viz/) to gain some deeper insight into the neural network learning ability.
 
 The first layer (before pooling) seems to provide much more information and insight than the second layer (2nd and 3rd rows of code cell 7). In the first layer you can see definite distinguishing features of each road sign. The resulting images are remarkably similar to what you'd expect to see after applying edge detection, with major shapes within the image outlined. It is utterly fascinating to see how each image or parameter set focuses on different features of the image without any initial influence on what those features should be. The model truly exhibits a form of learning behavior.
+
+
+#### First layer
+
+![First layer](./convolution-viz/ex0_first.jpeg "First layer")
+
+#### Second layer
+
+![Second layer](./convolution-viz/ex0_second.jpeg "Second layer")
+
+#### First layer
+
+![First layer](./convolution-viz/ex1_first.jpeg "First layer")
+![First layer](./convolution-viz/ex2_first.jpeg "First layer")
+![First layer](./convolution-viz/ex3_first.jpeg "First layer")
+![First layer](./convolution-viz/ex4_first.jpeg "First layer")
 
